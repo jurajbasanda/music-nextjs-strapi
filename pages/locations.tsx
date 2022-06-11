@@ -3,6 +3,7 @@ import React from 'react'
 import styles from '@/styles/Locations.module.css'
 //components
 import Layout from '@/components/Layout'
+
 interface Props {
 	locations?: Array<String>
 }

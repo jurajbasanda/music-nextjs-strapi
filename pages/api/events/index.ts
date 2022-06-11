@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 const { events } = require('./data.json')
 
 type Data = {
-	name: String
+	name?: String
 	message: any
 }
 
