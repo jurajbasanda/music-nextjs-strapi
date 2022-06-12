@@ -3,33 +3,46 @@ import Image from 'next/image'
 //styles
 import styles from '@/styles/EventItem.module.css'
 //components
-import { Event } from '../interfaces'
+import { Events, EventsAttributes } from '../interfaces'
 
 interface Props {
-	event: Event
+	event: Events
+	attributes?: EventsAttributes
 }
 
 const EventItem: React.FC<Props> = ({ event }) => {
+	const { attributes } = event
 	return (
 		<div className={styles.event}>
 			<div className={styles.img}>
-				<Image
-					src={event.image ? event.image : '/images/gig-placeholder.jpeg'}
-					alt={event.performers}
-					width='200'
-					height='110'
-				/>
+				{event && (
+					<Image
+						src={
+							attributes.image
+								? attributes.image.data.attributes.formats.thumbnail.url
+								: '/images/gig-placeholder.jpeg'
+						}
+						alt={attributes.name}
+						width='200'
+						height='100'
+					/>
+				)}
 			</div>
 			<div className={styles.info}>
 				<span>
-					{event.date} at {event.time}
+					<>
+						{event && new Date(attributes.date).toLocaleDateString('en-GB')} at{' '}
+						{attributes.time}
+					</>
 				</span>
-				<h3>{event.name}</h3>
+				<h3>{attributes.name}</h3>
 			</div>
 			<div className={styles.link}>
-				<Link href={`/events/${event.slug}`}>
-					<a className='btn'>Details</a>
-				</Link>
+				{event && (
+					<Link href={`/events/${attributes.slug}`}>
+						<a className='btn'>Details</a>
+					</Link>
+				)}
 			</div>
 		</div>
 	)

@@ -5,19 +5,17 @@ import Link from 'next/link'
 import { API_URL } from '@/config/index'
 import Layout from '@/components/Layout'
 import EventItem from '@/components/EventItem'
-import { Event } from '@/interfaces/index'
+import { Events } from '@/interfaces/index'
 
 interface Props {
-	events?: Array<Event>
+	events?: Array<Events>
 }
 const Home: NextPage<Props> = ({ events }) => {
 	return (
 		<Layout>
 			<h1>Upcomming Events</h1>
 			{events?.length === 0 && <h2>No new events</h2>}
-			{events?.map((e: Event) => (
-				<EventItem key={e.id} event={e} />
-			))}
+			{events && events?.map((e: Events) => <EventItem key={e.id} event={e} />)}
 			{events && (
 				<Link href='/events'>
 					<a className='btn-secondary'>View more</a>
@@ -34,8 +32,9 @@ Home.defaultProps = {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const res = await fetch(`${API_URL}/api/events`)
-	const events: [Event] = await res.json()
+	const res = await fetch(`${API_URL}/api/events?populate=*&_sort=date:ASC&_limit=3`)
+	const json = await res.json()
+	const events = json.data
 
 	if (!events) {
 		return {
@@ -43,6 +42,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		}
 	}
 	return {
-		props: { events: events.slice(0, 4) },
+		props: { events },
 	}
 }

@@ -6,36 +6,43 @@ import Styles from '@/styles/Event.module.css'
 //components
 import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
-import { Event } from '@/interfaces/index'
+import { Events } from '@/interfaces/index'
 import Link from 'next/link'
 
 interface Props {
-	event: Event
+	event: Events
 }
 const deleteEvent = () => {
 	alert('Delete')
 }
 
 const EventPage: NextPage<Props> = ({ event }) => {
+	const { attributes } = event
 	return (
 		<Layout>
 			<div className={Styles.event}>
 				<div className=''>
 					<span>
-						{event.date} at {event.time}
+						{event && new Date(attributes.date).toLocaleDateString('en-GB')} at{' '}
+						{attributes.time}{' '}
 					</span>
-					<h1>{event.name}</h1>
-					{event.image && (
+					<h1>{attributes.name}</h1>
+					{attributes.image && (
 						<div className={Styles.image}>
-							<Image src={event.image} alt={event.name} width='960' height='600' />
+							<Image
+								src={attributes.image.data.attributes.formats.medium.url}
+								alt={attributes.name}
+								width='960'
+								height='500'
+							/>
 						</div>
 					)}
 					<h3>Performers:</h3>
-					<p>{event.performers}</p>
+					<p>{attributes.performers}</p>
 					<h3>Description:</h3>
-					<p>{event.description}</p>
-					<h3>Venue: {event.venue}</h3>
-					<p>{event.address}</p>
+					<p>{attributes.description}</p>
+					<h3>Venue: {attributes.venue}</h3>
+					<p>{attributes.address}</p>
 				</div>
 			</div>
 			<div className={Styles.controls}>
@@ -60,8 +67,9 @@ const EventPage: NextPage<Props> = ({ event }) => {
 export default EventPage
 
 export const getServerSideProps: GetServerSideProps = async ({ query: { slug } }) => {
-	const res = await fetch(`${API_URL}/api/events/${slug}`)
-	const events: [Event] = await res.json()
+	const res = await fetch(`${API_URL}/api/events?filters[slug]slug=${slug}&populate=*`)
+	const eventsData = await res.json()
+	const events = eventsData.data
 
 	if (!events) {
 		return {
