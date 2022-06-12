@@ -27,7 +27,27 @@ EventsPage.defaultProps = {
 export default EventsPage
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const res = await fetch(`${API_URL}/api/events?populate=*&_sort=date:ASC`)
+	const qs = require('qs')
+	const pagination = qs.stringify(
+		{
+			pagination: {
+				page: 1,
+				pageSize: 10,
+			},
+		},
+		{
+			encodeValuesOnly: true,
+		}
+	)
+	const sortByDate = qs.stringify(
+		{
+			sort: ['date'],
+		},
+		{
+			encodeValuesOnly: true,
+		}
+	)
+	const res = await fetch(`${API_URL}/api/events?populate=*&${sortByDate}&${pagination}`)
 	const eventsData = await res.json()
 	const events = eventsData.data
 

@@ -6,8 +6,8 @@ interface Props {}
 const Showcase: React.FC<Props> = (props) => {
 	return (
 		<div className={styles.showcase}>
-			<h1>Welcome</h1>
-			<h2>Find gig for you</h2>
+			<h2>Find your perfect concert wherever you are</h2>
+			<h3>Discover the best live music, tailored to your music taste.</h3>
 		</div>
 	)
 }

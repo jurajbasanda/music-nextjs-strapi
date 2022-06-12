@@ -13,7 +13,7 @@ interface Props {
 const Home: NextPage<Props> = ({ events }) => {
 	return (
 		<Layout>
-			<h1>Upcomming Events</h1>
+			<h2>Upcomming Events</h2>
 			{events?.length === 0 && <h2>No new events</h2>}
 			{events && events?.map((e: Events) => <EventItem key={e.id} event={e} />)}
 			{events && (
@@ -32,7 +32,28 @@ Home.defaultProps = {
 export default Home
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const res = await fetch(`${API_URL}/api/events?populate=*&_sort=date:ASC&_limit=3`)
+	const qs = require('qs')
+	const pagination = qs.stringify(
+		{
+			pagination: {
+				page: 1,
+				pageSize: 3,
+			},
+		},
+		{
+			encodeValuesOnly: true,
+		}
+	)
+
+	const sortByDate = qs.stringify(
+		{
+			sort: ['date'],
+		},
+		{
+			encodeValuesOnly: true,
+		}
+	)
+	const res = await fetch(`${API_URL}/api/events?populate=*&${sortByDate}&${pagination}`)
 	const json = await res.json()
 	const events = json.data
 
