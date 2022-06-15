@@ -1,5 +1,8 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { FaPencilAlt, FaTimes } from 'react-icons/fa'
 //styles
 import Styles from '@/styles/Event.module.css'
@@ -12,12 +15,26 @@ import Link from 'next/link'
 interface Props {
 	event: Events
 }
-const deleteEvent = () => {
-	alert('Delete')
-}
 
 const EventPage: NextPage<Props> = ({ event }) => {
-	const { attributes } = event
+	const { attributes, id } = event
+	const router = useRouter()
+	const deleteEvent = async (id: number) => {
+		if (confirm('Are you sure?')) {
+			const res = await fetch(`${API_URL}/events/${id}`, {
+				method: 'DELETE',
+			})
+
+			const data = await res.json()
+
+			if (!res.ok) {
+				toast.error(data.message)
+			} else {
+				router.push('/events')
+			}
+		}
+	}
+
 	return (
 		<Layout>
 			<div className={Styles.event}>
@@ -26,11 +43,19 @@ const EventPage: NextPage<Props> = ({ event }) => {
 						{event && new Date(attributes.date).toLocaleDateString('en-GB')} at{' '}
 						{attributes.time}{' '}
 					</span>
+					<ToastContainer
+						position='top-right'
+						autoClose={500}
+						hideProgressBar={true}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+					/>
 					<h1>{attributes.name}</h1>
-					{attributes.image && (
+					{attributes.image.data?.attributes && (
 						<div className={Styles.image}>
 							<Image
-								src={attributes.image.data.attributes.formats.medium.url}
+								src={attributes.image.data?.attributes?.formats.medium.url}
 								alt={attributes.name}
 								width='960'
 								height='500'

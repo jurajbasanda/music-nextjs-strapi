@@ -16,14 +16,17 @@ const Header: React.FC<Props> = (props) => {
 			<Search />
 			<nav>
 				<ul>
-					<li>
+					{/* <li>
 						<Link href='/artists'>Artists</Link>
-					</li>
-					<li>
+					</li> */}
+					{/* <li>
 						<Link href='/events'>Events</Link>
-					</li>
+					</li> */}
 					<li>
 						<Link href='/locations'>Locations</Link>
+					</li>
+					<li>
+						<Link href='/events/add'>Add event</Link>
 					</li>
 				</ul>
 			</nav>

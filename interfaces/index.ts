@@ -12,9 +12,6 @@ export interface EventsAttributes {
 	time: string
 	performers: string
 	description: string
-	createdAt: Date
-	updatedAt: Date
-	publishedAt: Date
 	image: Image
 }
 

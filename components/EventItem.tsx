@@ -15,7 +15,7 @@ const EventItem: React.FC<Props> = ({ event }) => {
 	return (
 		<div className={styles.event}>
 			<div className={styles.img}>
-				{event && (
+				{event.attributes.image.data && (
 					<Image
 						src={
 							attributes.image
