@@ -11,6 +11,7 @@ import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import { Events } from '@/interfaces/index'
 import Link from 'next/link'
+import { MouseEventHandler } from 'react'
 
 interface Props {
 	event: Events
@@ -19,20 +20,8 @@ interface Props {
 const EventPage: NextPage<Props> = ({ event }) => {
 	const { attributes, id } = event
 	const router = useRouter()
-	const deleteEvent = async (id: number) => {
-		if (confirm('Are you sure?')) {
-			const res = await fetch(`${API_URL}/events/${id}`, {
-				method: 'DELETE',
-			})
-
-			const data = await res.json()
-
-			if (!res.ok) {
-				toast.error(data.message)
-			} else {
-				router.push('/events')
-			}
-		}
+	const deleteEvent: MouseEventHandler<HTMLAnchorElement> = () => {
+		alert('Delete')
 	}
 
 	return (

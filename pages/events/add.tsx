@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -21,7 +21,7 @@ const AddPage: NextPage = () => {
 		performers: '',
 		description: '',
 	})
-	const handleSubmit = async (e: any) => {
+	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		const isEmpty = Object.values(values).some((value): any => value === '')
 		const data = { data: { ...values } }
 
