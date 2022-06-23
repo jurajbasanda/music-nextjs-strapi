@@ -31,6 +31,13 @@
 	gap: 30px;
 	margin-bottom: 20px;
 }
+.imageGroup {
+	display: grid;
+}
+.imageGroup img {
+	width: 240px !important;
+	height: 150px !important;
+}
 
 @media (max-width: 600px) {
 	.grid {

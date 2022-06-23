@@ -26,7 +26,7 @@ EventsPage.defaultProps = {
 
 export default EventsPage
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const qs = require('qs')
 	const pagination = qs.stringify(
 		{

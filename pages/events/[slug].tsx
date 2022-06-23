@@ -12,6 +12,7 @@ import { API_URL } from '@/config/index'
 import { Events } from '@/interfaces/index'
 import Link from 'next/link'
 import { MouseEventHandler } from 'react'
+import moment from 'moment'
 
 interface Props {
 	event: Events
@@ -20,18 +21,29 @@ interface Props {
 const EventPage: NextPage<Props> = ({ event }) => {
 	const { attributes, id } = event
 	const router = useRouter()
-	const deleteEvent: MouseEventHandler<HTMLAnchorElement> = () => {
-		alert('Delete')
+	const deleteEvent: MouseEventHandler<HTMLAnchorElement> = async (e) => {
+		if (confirm('Are you sure ?')) {
+			const res = await fetch(`${API_URL}/api/events/${id}`, { method: 'DELETE' })
+			const data = await res.json()
+
+			if (!res.ok) {
+				toast.error(data.message)
+			} else {
+				router.push('/events')
+			}
+		}
 	}
 
 	return (
 		<Layout>
 			<div className={Styles.event}>
 				<div className=''>
-					<span>
-						{event && new Date(attributes.date).toLocaleDateString('en-GB')} at{' '}
-						{attributes.time}{' '}
-					</span>
+					{event && (
+						<span>
+							{moment(attributes.date).format('ddd DD MMM yyyy')} at{' '}
+							{moment(`2000-01-01T${attributes.time}`).format('h:mm A')}
+						</span>
+					)}
 					<ToastContainer
 						position='top-right'
 						autoClose={500}

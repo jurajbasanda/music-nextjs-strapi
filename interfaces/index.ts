@@ -9,7 +9,7 @@ export interface EventsAttributes {
 	venue: string
 	address: string
 	date: Date
-	time: string
+	time: Date
 	performers: string
 	description: string
 	image: Image

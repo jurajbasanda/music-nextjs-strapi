@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from '@/styles/EventItem.module.css'
 //components
 import { Events, EventsAttributes } from '../interfaces'
+import moment from 'moment'
 
 interface Props {
 	event: Events
@@ -31,8 +32,8 @@ const EventItem: React.FC<Props> = ({ event }) => {
 			<div className={styles.info}>
 				<span>
 					<>
-						{event && new Date(attributes.date).toLocaleDateString('en-GB')} at{' '}
-						{attributes.time}
+						{event && moment(attributes.date).format(`ddd DD MMM`)} at{' '}
+						{/* {event && moment(attributes.time).format(`HH:mm`)} */}
 					</>
 				</span>
 				<h3>{attributes.name}</h3>

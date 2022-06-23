@@ -9,6 +9,7 @@ import { EventsAttributes } from '@/interfaces/index'
 import Layout from '@/components/Layout'
 //styles
 import styles from '@/styles/Form.module.css'
+import moment from 'moment'
 
 const AddPage: NextPage = () => {
 	const router = useRouter()
@@ -16,8 +17,7 @@ const AddPage: NextPage = () => {
 		name: '',
 		venue: '',
 		address: '',
-		date: '',
-		time: '',
+		datetime: '',
 		performers: '',
 		description: '',
 	})
@@ -27,7 +27,8 @@ const AddPage: NextPage = () => {
 
 		e.preventDefault()
 		if (isEmpty) {
-			toast.error('Please fill all fields')
+			toast.error(`Please fill all fields`)
+			console.log(isEmpty)
 		} else {
 			const res = await fetch(`${API_URL}/api/events`, {
 				method: 'POST',
@@ -71,6 +72,7 @@ const AddPage: NextPage = () => {
 							id='name'
 							value={values.name}
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<div>
@@ -81,6 +83,7 @@ const AddPage: NextPage = () => {
 							id='performers'
 							value={values.performers}
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<div>
@@ -91,6 +94,7 @@ const AddPage: NextPage = () => {
 							id='venue'
 							value={values.venue}
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<div>
@@ -101,28 +105,20 @@ const AddPage: NextPage = () => {
 							id='address'
 							value={values.address}
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 					<div>
-						<label htmlFor='name'>Date:</label>
+						<label htmlFor='datetime'>Date:</label>
 						<input
-							type='date'
-							name='date'
-							id='date'
-							value={values.date}
+							type='datetime-local'
+							name='datetime'
+							id='datetime'
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
-					<div>
-						<label htmlFor='name'>Time:</label>
-						<input
-							type='time'
-							name='time'
-							id='time'
-							value={values.time}
-							onChange={handleInputChange}
-						/>
-					</div>
+
 					<div>
 						<label htmlFor='name'>Description:</label>
 						<textarea
@@ -130,6 +126,7 @@ const AddPage: NextPage = () => {
 							id='description'
 							value={values.description}
 							onChange={handleInputChange}
+							required
 						/>
 					</div>
 				</div>
