@@ -4,7 +4,7 @@ import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 import { Events } from '@/interfaces/index'
-import EventItem from '@/components/EventItem'
+import EventItem from '@/components/common/EventItem'
 //styles
 import styles from '@/styles/SearchPage.module.css'
 import Link from 'next/link'

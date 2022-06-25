@@ -13,6 +13,8 @@ import Layout from '@/components/Layout'
 //styles
 import styles from '@/styles/Form.module.css'
 import Image from 'next/image'
+import Modal from '@/components/common/Modal'
+import ImageUpload from '@/components/ImageUpload'
 
 interface Props {
 	event: Events
@@ -23,6 +25,7 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 	const { query } = router
 	const { attributes } = event
 
+	const [showModal, setShowModal] = useState<boolean>(false)
 	const [values, setValues] = useState<any>({
 		name: attributes?.name,
 		venue: attributes?.venue,
@@ -36,6 +39,9 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 		attributes.image.data ? attributes.image.data.attributes.formats.thumbnail : null
 	)
 
+	const imageUploaded = (e: any) => {
+		console.log(e)
+	}
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		const isEmpty = Object.values(values).some((value): any => value === '')
 		const checkIfTimeChanged =
@@ -176,10 +182,17 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 						) : (
 							<p>No image uploaded</p>
 						)}
-						<button className='btn-secondary'>
+						<button className='btn-secondary' onClick={() => setShowModal(true)}>
 							<FaImage /> Set Image
 						</button>
 					</div>
+					<Modal
+						show={showModal}
+						onClose={() => setShowModal(false)}
+						title='Image upload'
+					>
+						<ImageUpload eventId={event.id} imageUploaded={imageUploaded} />
+					</Modal>
 				</>
 			)}
 		</Layout>

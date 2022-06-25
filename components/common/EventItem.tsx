@@ -3,7 +3,7 @@ import Image from 'next/image'
 //styles
 import styles from '@/styles/EventItem.module.css'
 //components
-import { Events, EventsAttributes } from '../interfaces'
+import { Events, EventsAttributes } from '../../interfaces'
 import moment from 'moment'
 
 interface Props {

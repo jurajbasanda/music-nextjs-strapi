@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next/types'
 import Link from 'next/link'
 import { API_URL } from '@/config/index'
 import Layout from '@/components/Layout'
-import EventItem from '@/components/EventItem'
+import EventItem from '@/components/common/EventItem'
 import { Events } from '@/interfaces/index'
 
 interface Props {
