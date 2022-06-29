@@ -2,18 +2,15 @@ import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 import type { NextPage } from 'next'
-import { Events } from '@/interfaces/index'
+import { Events, MetaPagination } from '@/interfaces/index'
 import EventItem from '@/components/common/EventItem'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 interface Props {
 	events?: Array<Events>
+	metaPagination: MetaPagination
 }
-const EventsPage: NextPage<Props> = ({ events }) => {
-	const route = useRouter()
-
-	const { query } = route
-
+const EventsPage: NextPage<Props> = ({ events, metaPagination }) => {
 	return (
 		<Layout>
 			<h1>Upcomming Events</h1>
@@ -21,6 +18,19 @@ const EventsPage: NextPage<Props> = ({ events }) => {
 			{events?.map((e: Events) => (
 				<EventItem key={e.id} event={e} />
 			))}
+			<div className='display-flex-row-spaceBetween'>
+				{metaPagination?.page > 1 && (
+					<Link href={`/events?page=${metaPagination?.page - 1}`}>
+						<a className='btn-secondary'>{`<`}</a>
+					</Link>
+				)}
+				{metaPagination?.pageCount > 1 &&
+					metaPagination?.page < metaPagination?.pageCount && (
+						<Link href={`/events?page=${metaPagination?.page + 1}`}>
+							<a className='btn-secondary'>{`>`}</a>
+						</Link>
+					)}
+			</div>
 		</Layout>
 	)
 }
@@ -37,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query: { page } }
 		{
 			pagination: {
 				page: page,
-				pageSize: 1,
+				pageSize: 2,
 			},
 		},
 		{
@@ -55,6 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query: { page } }
 	const res = await fetch(`${API_URL}/api/events?populate=*&${sortByDate}&${pagination}`)
 	const eventsData = await res.json()
 	const events = eventsData.data
+	const metaPagination = eventsData.meta.pagination
 
 	if (!events) {
 		return {
@@ -62,6 +73,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query: { page } }
 		}
 	}
 	return {
-		props: { events },
+		props: { events, metaPagination },
 	}
 }

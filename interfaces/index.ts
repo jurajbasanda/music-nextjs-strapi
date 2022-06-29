@@ -1,3 +1,9 @@
+export interface MetaPagination {
+	page: number
+	pageCount: number
+	pageSize: number
+	total: number
+}
 export interface Events {
 	id: number
 	attributes: EventsAttributes
