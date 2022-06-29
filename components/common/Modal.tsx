@@ -18,14 +18,11 @@ const Modal: React.FC<Props> = ({ show, onClose, children, title }) => {
 		ref.current.focus()
 		onClose()
 	}
-	console.log('ref', ref)
-	console.log('ref.current BEFORE:', ref.current)
 
 	useEffect(() => {
 		setBrowser(true)
 		ref.current = document.querySelector('.modal-root')!
-		console.log('ref.current AFTER:', ref.current)
-		console.log('ref.current AFTER focus:', ref.current.focus())
+
 		return () => setBrowser(false)
 	}, [])
 

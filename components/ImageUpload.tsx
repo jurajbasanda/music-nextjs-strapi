@@ -14,11 +14,11 @@ const ImageUpload: React.FC<Props> = ({ eventId, imageUploaded }) => {
 		e.preventDefault()
 		const formData = new FormData()
 		formData.append('files', image)
-		formData.append('ref', 'events')
+		formData.append('ref', 'api::event.event')
 		formData.append('refId', eventId)
 		formData.append('field', 'image')
 
-		const res = await fetch(`${API_URL}/upload`, {
+		const res = await fetch(`${API_URL}/api/upload`, {
 			method: 'POST',
 			headers: {},
 			body: formData,

@@ -17,9 +17,11 @@ const AddPage: NextPage = () => {
 		name: '',
 		venue: '',
 		address: '',
-		datetime: '',
+		// datetime: '',
 		performers: '',
 		description: '',
+		date: '',
+		time: '',
 	})
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		const isEmpty = Object.values(values).some((value): any => value === '')
@@ -28,7 +30,7 @@ const AddPage: NextPage = () => {
 		e.preventDefault()
 		if (isEmpty) {
 			toast.error(`Please fill all fields`)
-			console.log(isEmpty)
+			console.error('Please fill:', data.data)
 		} else {
 			const res = await fetch(`${API_URL}/api/events`, {
 				method: 'POST',
@@ -46,7 +48,10 @@ const AddPage: NextPage = () => {
 	}
 	const handleInputChange = (e: any) => {
 		const { name, value } = e.target
-		setValues({ ...values, [name]: value })
+		setValues({
+			...values,
+			[name]: value,
+		})
 	}
 	return (
 		<Layout title='New Event'>
@@ -109,11 +114,22 @@ const AddPage: NextPage = () => {
 						/>
 					</div>
 					<div>
-						<label htmlFor='datetime'>Date:</label>
+						<label htmlFor='date'>Date:</label>
 						<input
-							type='datetime-local'
-							name='datetime'
-							id='datetime'
+							type='date'
+							name='date'
+							id='date'
+							defaultValue={moment().format('yyyy-MM-DD')}
+							min={moment().format('yyyy-MM-DD')}
+							onChange={handleInputChange}
+							required
+						/>
+						<label htmlFor='time'>Time:</label>
+						<input
+							type='text'
+							name='time'
+							id='time'
+							defaultValue={moment().format('hh A')}
 							onChange={handleInputChange}
 							required
 						/>

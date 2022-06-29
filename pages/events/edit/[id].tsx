@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from 'react'
+import { FormEventHandler, useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import moment from 'moment'
@@ -35,21 +35,27 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 		performers: attributes?.performers,
 		description: attributes?.description,
 	})
+
 	const [imagePreview, setImagePreview] = useState<any>(
 		attributes.image.data ? attributes.image.data.attributes.formats.thumbnail : null
 	)
 
-	const imageUploaded = (e: any) => {
-		console.log(e)
+	const imageUploaded = async (e: any) => {
+		const res = await fetch(`${API_URL}/api/events?filters[id]id=${event.id}&populate=*`)
+		const updatedEvent = await res.json()
+
+		setImagePreview(
+			updatedEvent.data[0].attributes.image.data.attributes.formats.thumbnail
+		)
+		setShowModal(false)
 	}
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		const isEmpty = Object.values(values).some((value): any => value === '')
-		const checkIfTimeChanged =
-			values.time !== attributes.time ? `${values.time}:00:000` : values.time
+
 		const data = {
 			data: {
 				...values,
-				time: checkIfTimeChanged,
+				// time: checkIfTimeChanged,
 			},
 		}
 
@@ -148,10 +154,10 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 							<div>
 								<label htmlFor='time'>Time:</label>
 								<input
-									type='time'
+									type='text'
 									name='time'
 									id='time'
-									value={moment(`2000-01-01T${values.time}`).format('HH:mm')}
+									value={values.time}
 									onChange={handleInputChange}
 								/>
 							</div>
@@ -173,8 +179,8 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 								<p>Event Image:</p>
 								<Image
 									src={imagePreview.url}
-									width={245}
-									height={138}
+									width='245'
+									height='138'
 									alt={imagePreview.hash}
 									id='image'
 								/>

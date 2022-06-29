@@ -37,11 +37,17 @@ const EventPage: NextPage<Props> = ({ event }) => {
 	return (
 		<Layout>
 			<div className={Styles.event}>
+				<div>
+					<Link href='/events'>
+						<a href={Styles.back}>{'<'} Go back</a>
+					</Link>
+				</div>
 				<div className=''>
 					{event && (
 						<span>
-							{moment(attributes.date).format('ddd DD MMM yyyy')} at{' '}
-							{moment(`2000-01-01T${attributes.time}`).format('h:mm A')}
+							<>
+								{moment(attributes.date).format('ddd DD MMM yyyy')} at {attributes.time}
+							</>
 						</span>
 					)}
 					<ToastContainer

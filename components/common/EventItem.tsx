@@ -33,7 +33,7 @@ const EventItem: React.FC<Props> = ({ event }) => {
 				<span>
 					<>
 						{event && moment(attributes.date).format(`ddd DD MMM`)} at{' '}
-						{/* {event && moment(attributes.time).format(`HH:mm`)} */}
+						{event && attributes.time}
 					</>
 				</span>
 				<h3>{attributes.name}</h3>
