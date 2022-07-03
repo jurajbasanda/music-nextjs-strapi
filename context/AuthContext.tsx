@@ -4,10 +4,10 @@ import { API_URL } from '@/config/index'
 
 type authContextType = {
 	error: any
-	user: any
-	login: any
-	logout: any
-	register: any
+	user: boolean | null
+	login: ({}: Props) => void
+	logout: ({}: Props) => void
+	register: ({}: Props) => void
 }
 const authContextDefaultValues: authContextType = {
 	error: null,
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: Props) => {
 		console.log({ identifier, password })
 	}
 	//Logout
-	const logout = async ({}: Props): Promise<any> => {
+	const logout = async ({}: Props): Promise<void> => {
 		console.log('Logout')
 	}
 	//Check if user is logged in
