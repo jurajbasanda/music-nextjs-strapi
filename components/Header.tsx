@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
 import styles from '@/styles/Header.module.css'
 import Search from './Search'
 
@@ -28,6 +29,22 @@ const Header: React.FC<Props> = (props) => {
 					<li>
 						<Link href='/events/add'>Add event</Link>
 					</li>
+					<li>
+						<Link href='/account/login'>
+							<a className='btn-secondary btn-icon'>
+								<FaSignInAlt />
+								Log in
+							</a>
+						</Link>
+					</li>
+					{/* <li>
+						<Link href='/account'>
+							<a className='btn-secondary btn-icon'>
+								<FaSignOutAlt />
+								Log out
+							</a>
+						</Link>
+					</li> */}
 				</ul>
 			</nav>
 		</header>

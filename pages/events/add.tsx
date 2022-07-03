@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
 import { API_URL } from '@/config/index'
 import type { NextPage } from 'next'
-import { EventsAttributes } from '@/interfaces/index'
 import Layout from '@/components/Layout'
 //styles
 import styles from '@/styles/Form.module.css'

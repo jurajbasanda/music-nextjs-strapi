@@ -333,6 +333,13 @@
   "resolved" "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
   "version" "0.0.1"
 
+"context-api@^0.0.2":
+  "integrity" "sha512-/92pnGJS5irtzF2SNFjnNl2c2EIbFiyB88N8/r0CS9xnE3F/+wQKBV2ym7Fr7XVUqV9QvTkmEDuwdiyzaX3M8w=="
+  "resolved" "https://registry.npmjs.org/context-api/-/context-api-0.0.2.tgz"
+  "version" "0.0.2"
+  dependencies:
+    "immer" "^9.0.1"
+
 "core-js-pure@^3.20.2":
   "integrity" "sha512-bOxbZIy9S5n4OVH63XaLVXZ49QKicjowDx/UELyJ68vxfCRpYsbyh/WNZNfEfAk+ekA8vSjt+gCDpvh672bc3w=="
   "resolved" "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.22.8.tgz"
@@ -881,6 +888,11 @@
   "integrity" "sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ=="
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   "version" "5.2.0"
+
+"immer@^9.0.1":
+  "integrity" "sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ=="
+  "resolved" "https://registry.npmjs.org/immer/-/immer-9.0.15.tgz"
+  "version" "9.0.15"
 
 "import-fresh@^3.0.0", "import-fresh@^3.2.1":
   "integrity" "sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw=="
