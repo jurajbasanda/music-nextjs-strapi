@@ -1,14 +1,12 @@
-import React from 'react'
-//styles
-import styles from '@/styles/Locations.module.css'
-//components
+import type { NextPage } from 'next'
 import Layout from '@/components/Layout'
+import styles from '@/styles/Locations.module.css'
 
 interface Props {
 	locations?: Array<String>
 }
 
-const LocationsPage: React.FC<Props> = ({ locations }) => {
+const LocationsPage: NextPage<Props> = ({ locations }) => {
 	return (
 		<Layout>
 			<div className={styles.locationsContainer}>

@@ -9,7 +9,7 @@ import Styles from '@/styles/Event.module.css'
 //components
 import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
-import { Events } from '@/interfaces/index'
+import { Events } from '@/interfaces/events'
 import Link from 'next/link'
 import { MouseEventHandler } from 'react'
 import moment from 'moment'

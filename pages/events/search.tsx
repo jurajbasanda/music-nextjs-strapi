@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
-import { Events } from '@/interfaces/index'
+import { Events } from '@/interfaces/events'
 import EventItem from '@/components/common/EventItem'
 //styles
 import styles from '@/styles/SearchPage.module.css'

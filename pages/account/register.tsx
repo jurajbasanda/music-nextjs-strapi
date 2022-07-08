@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify'
 
 import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
+import AuthContext from '@/context/AuthContext'
 
 interface Props {}
 
@@ -14,6 +15,7 @@ const RegisterPage: NextPage<Props> = () => {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [passwordConfirm, setPasswordConfirm] = useState<string>('')
+	const { register, user, error } = useContext(AuthContext)
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
@@ -22,7 +24,7 @@ const RegisterPage: NextPage<Props> = () => {
 
 			console.log({ password, passwordConfirm })
 		}
-		console.log({ email: email, password: password })
+		register({ user: { email, password, username } })
 	}
 	return (
 		<Layout title='User Registration'>
@@ -46,6 +48,7 @@ const RegisterPage: NextPage<Props> = () => {
 							id='username'
 							name='username'
 							value={username}
+							autoComplete='username'
 							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</div>
@@ -56,6 +59,7 @@ const RegisterPage: NextPage<Props> = () => {
 							id='email'
 							name='email'
 							value={email}
+							autoComplete='email'
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
@@ -66,6 +70,7 @@ const RegisterPage: NextPage<Props> = () => {
 							id='password'
 							name='password'
 							value={password}
+							autoComplete='new-password'
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
@@ -76,6 +81,7 @@ const RegisterPage: NextPage<Props> = () => {
 							id='passwordConfirm'
 							name='passwordConfirm'
 							value={passwordConfirm}
+							autoComplete='new-password'
 							onChange={(e) => setPasswordConfirm(e.target.value)}
 						/>
 					</div>

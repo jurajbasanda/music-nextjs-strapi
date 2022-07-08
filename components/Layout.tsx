@@ -2,11 +2,10 @@ import Head from 'next/head'
 import React from 'react'
 import { useRouter } from 'next/router'
 //style
-import styles from '@/styles/Layout.module.css'
-//componets
 import Footer from './Footer'
 import Header from './Header'
 import Showcase from './Showcase'
+import styles from '@/styles/Layout.module.css'
 
 interface Props {
 	title?: String

@@ -2,7 +2,7 @@ import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 import type { NextPage } from 'next'
-import { Events, MetaPagination } from '@/interfaces/index'
+import { Events, MetaPagination } from '@/interfaces/events'
 import EventItem from '@/components/common/EventItem'
 import Link from 'next/link'
 
