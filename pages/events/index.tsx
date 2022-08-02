@@ -12,7 +12,7 @@ interface Props {
 }
 const EventsPage: NextPage<Props> = ({ events, metaPagination }) => {
 	return (
-		<Layout>
+		<Layout title={`All Events`}>
 			<h1>Upcomming Events</h1>
 			{events?.length === 0 && <h2>No new events</h2>}
 			{events?.map((e: Events) => (

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FormEventHandler, useState, useEffect, useContext } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
@@ -20,7 +21,7 @@ const RegisterPage: NextPage<Props> = () => {
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
 		if (password !== passwordConfirm) {
-			toast.error('Please fill all fields')
+			toast.error('Passwords do not match')
 
 			console.log({ password, passwordConfirm })
 		}

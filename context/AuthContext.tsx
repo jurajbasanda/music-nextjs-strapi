@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }: Props) => {
 	}
 	//Login
 	const login = async ({ email: identifier, password }: LoginDetails): Promise<any> => {
+		//send login details to the next backend
 		const res = await fetch(`${NEXT_URL}/api/login`, {
 			method: 'POST',
 			headers: { 'Content-type': 'application/json' },
@@ -51,11 +52,12 @@ export const AuthProvider = ({ children }: Props) => {
 		console.log(data)
 
 		if (res.ok) {
+			setError(null)
 			setUser(data.user)
 			console.log(data.user)
 		} else {
+			setUser(null)
 			setError(data.error)
-			setError(null)
 		}
 	}
 	//Logout

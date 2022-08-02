@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FormEventHandler, useState, useEffect, useContext } from 'react'
 import { FaUser } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Layout from '@/components/Layout'
 import styles from '@/styles/AuthForm.module.css'
@@ -16,16 +17,8 @@ const LoginPage: NextPage<Props> = () => {
 	const { login, user, error } = useContext(AuthContext)
 
 	useEffect(() => {
-		error &&
-			toast.error(error.message, {
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			})
-	})
+		error && toast.error(error.message)
+	}, [error])
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
@@ -37,18 +30,18 @@ const LoginPage: NextPage<Props> = () => {
 	return (
 		<>
 			<Layout title='User Login'>
+				<ToastContainer
+					position='top-right'
+					autoClose={500}
+					hideProgressBar={true}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+				/>
 				<div className={styles.auth}>
 					<h1>
 						<FaUser /> Log in
 					</h1>
-					<ToastContainer
-						position='top-right'
-						autoClose={500}
-						hideProgressBar={true}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-					/>
 					<form onSubmit={handleSubmit}>
 						<div>
 							<label htmlFor='email'>Email</label>

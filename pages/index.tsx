@@ -11,7 +11,7 @@ interface Props {
 }
 const Home: NextPage<Props> = ({ events }) => {
 	return (
-		<Layout>
+		<Layout title='Home'>
 			<h2>Upcomming Events</h2>
 			{events?.length === 0 && <h2>No new events</h2>}
 			{events && events?.map((e: Events) => <EventItem key={e.id} event={e} />)}

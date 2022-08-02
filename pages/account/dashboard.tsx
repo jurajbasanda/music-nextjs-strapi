@@ -7,7 +7,7 @@ interface Props {}
 
 const Dashboard: NextPage<Props> = (props) => {
 	return (
-		<Layout title='User Login'>
+		<Layout title='User Dashboard'>
 			<ToastContainer
 				position='top-right'
 				autoClose={500}

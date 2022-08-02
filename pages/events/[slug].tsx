@@ -35,7 +35,7 @@ const EventPage: NextPage<Props> = ({ event }) => {
 	}
 
 	return (
-		<Layout>
+		<Layout title={attributes.name}>
 			<div className={Styles.event}>
 				<div>
 					<Link href='/events'>

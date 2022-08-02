@@ -1,7 +1,6 @@
 import { API_URL } from '@/config/index'
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default async (req: any, res: any) => {
+const Login = async (req: any, res: any) => {
 	if (req.method === 'POST') {
 		const { identifier, password } = req.body
 		const strapiRes = await fetch(`${API_URL}/api/auth/local`, {
@@ -20,3 +19,4 @@ export default async (req: any, res: any) => {
 		res.status(405).json({ message: `Method ${req.method} not allowed!` })
 	}
 }
+export default Login

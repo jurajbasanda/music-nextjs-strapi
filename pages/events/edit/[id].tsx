@@ -83,7 +83,7 @@ const EditEventPage: NextPage<Props> = ({ event }) => {
 		setValues({ ...values, [name]: value })
 	}
 	return (
-		<Layout title='New Event'>
+		<Layout title='Edit Event'>
 			<Link href='/'>
 				<a>{`<`}Go Back</a>
 			</Link>

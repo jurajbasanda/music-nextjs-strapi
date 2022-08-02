@@ -19,7 +19,7 @@ const Layout: React.FC<Props> = ({ title, keywords, description, children }) => 
 	return (
 		<>
 			<Head>
-				<title>{title}</title>
+				<title>Musicevent - {title}</title>
 				<meta name='description' content={description} />
 				<meta name='keywords' content={keywords} />
 			</Head>
@@ -32,7 +32,7 @@ const Layout: React.FC<Props> = ({ title, keywords, description, children }) => 
 }
 
 Layout.defaultProps = {
-	title: 'Title',
+	title: '',
 	description: 'description',
 	keywords: 'music, events',
 }
